@@ -115,6 +115,7 @@ KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
 KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
 KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
 )
+
 };
 
 #if defined(ENCODER_MAP_ENABLE)
