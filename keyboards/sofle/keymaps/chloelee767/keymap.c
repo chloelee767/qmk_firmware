@@ -22,7 +22,7 @@ KC_Y, KC_U, LGUI_T(KC_I), KC_O, KC_P, KC_0,
 KC_ESC, LSFT_T(KC_A), LGUI_T(KC_S), LALT_T(KC_D), LCTL_T(KC_F), KC_G,
 KC_H, LCTL_T(KC_J), LALT_T(KC_K), LGUI_T(KC_L), LSFT_T(KC_SCLN), KC_QUOT,
 /* Zxc Row (Left) */
-KC_CAPS, KC_Z, KC_X, KC_C, KC_V, KC_B,
+QK_CAPS_WORD_TOGGLE, KC_Z, KC_X, KC_C, KC_V, KC_B,
 /* Encoder presses */
 KC_MPLY, KC_NO,
 /* Zxc Row (Right) */
@@ -132,6 +132,29 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 };
 #endif
 
+#ifdef CAPS_WORD_ENABLE
+bool caps_word_press_user(uint16_t keycode) {
+    switch (keycode) {
+        // Keycodes that continue Caps Word, with shift applied.
+        case KC_A ... KC_Z:
+            add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
+            return true;
+
+        // Keycodes that continue Caps Word, without shifting.
+        case KC_1 ... KC_0:
+        case KC_BSPC:
+        case KC_DEL:
+        case KC_MINS:
+        case KC_UNDS:
+            return true;
+
+        default:
+            return false;  // Deactivate Caps Word.
+    }
+}
+#endif
+
+
 #ifdef OLED_ENABLE
 void custom_print_status(void) {
     // Host Keyboard Layer Status
@@ -157,8 +180,9 @@ void custom_print_status(void) {
     oled_write_ln_P("", false);
 
     // Host Keyboard LED Status
+    oled_write_P(PSTR("CAPSW"), is_caps_word_on());
     led_t led_state = host_keyboard_led_state();
-    oled_write_P(PSTR("CAPS"), led_state.caps_lock);
+    oled_write_P(PSTR("C"), led_state.caps_lock);
 }
 
 /* Copied from ../../sofle.c */
