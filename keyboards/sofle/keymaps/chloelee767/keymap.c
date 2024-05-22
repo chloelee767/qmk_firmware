@@ -2,15 +2,15 @@
 
 enum sofle_layers {
 _QWERTY,
-_NUMNAV,
 _SYMBOLS,
+_NUMNAV,
 _FNKEYS,
 _MULTIMEDIA
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-[0] =
+[_QWERTY] =
 LAYOUT(
 /* Number Row */
 KC_GRV, KC_HOME, KC_END, KC_PGUP, KC_PGDN, KC_GRV,
@@ -32,7 +32,7 @@ KC_LGUI, KC_LALT, LT(3,KC_DEL), LT(1,KC_BSPC), LT(2,KC_TAB),
 LT(1,KC_ENT), LT(2,KC_SPC), LT(3,KC_BSPC), KC_RALT, MO(4)
 ),
 
-[1] = LAYOUT(
+[_SYMBOLS] = LAYOUT(
 /* Number Row */
 KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
 KC_NO, KC_TRNS, KC_TRNS, KC_TRNS, KC_NO, KC_NO,
@@ -53,7 +53,7 @@ KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS,
 KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO
 ),
 
-[2] = LAYOUT(
+[_NUMNAV] = LAYOUT(
 /* Number Row */
 KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
 KC_BSLS, KC_MINS, KC_1, LGUI_T(KC_2), KC_3, KC_4,
@@ -74,7 +74,7 @@ KC_0, KC_TRNS, KC_NO, KC_NO, KC_NO,
 KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
 ),
 
-[3] = LAYOUT(
+[_FNKEYS] = LAYOUT(
 /* Number Row */
 KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
 KC_F9, KC_F10, KC_F11, KC_F12, KC_F13, KC_NO,
@@ -95,7 +95,7 @@ KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
 KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
 ),
 
-[4] = LAYOUT(
+[_MULTIMEDIA] = LAYOUT(
 /* Number Row */
 KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
 KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
@@ -115,5 +115,4 @@ KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
 KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
 KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
 )
-
 };
