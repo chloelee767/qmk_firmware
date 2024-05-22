@@ -135,8 +135,6 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 #ifdef OLED_ENABLE
 bool oled_task_user(void) {
     // Host Keyboard Layer Status
-    oled_write_P(PSTR("Layer: "), false);
-
     switch (get_highest_layer(layer_state)) {
         case _QWERTY:
             oled_write_ln_P(PSTR("BASE"), false);
@@ -145,7 +143,7 @@ bool oled_task_user(void) {
             oled_write_ln_P(PSTR("SYM"), false);
             break;
         case _NUMNAV:
-            oled_write_ln_P(PSTR("NUMNAV"), false);
+            oled_write_ln_P(PSTR("NMNAV"), false);
             break;
         case _FNKEY:
             oled_write_ln_P(PSTR("FN"), false);
