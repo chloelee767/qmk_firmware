@@ -127,3 +127,37 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_MULTIMEDIA] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
 };
 #endif
+
+#ifdef OLED_ENABLE
+bool oled_task_user(void) {
+    // Host Keyboard Layer Status
+    oled_write_P(PSTR("Layer: "), false);
+
+    switch (get_highest_layer(layer_state)) {
+        case _QWERTY:
+            oled_write_ln_P(PSTR("BASE"), false);
+            break;
+        case _SYMBOL:
+            oled_write_ln_P(PSTR("SYM"), false);
+            break;
+        case _NUMNAV:
+            oled_write_ln_P(PSTR("NUMNAV"), false);
+            break;
+        case _FNKEY:
+            oled_write_ln_P(PSTR("FN"), false);
+            break;
+        case _MULTIMEDIA:
+            oled_write_ln_P(PSTR("MEDIA"), false);
+            break;
+        default:
+            oled_write_ln_P(PSTR("?"), false);
+    }
+    oled_write_ln_P("", false);
+
+    // Host Keyboard LED Status
+    led_t led_state = host_keyboard_led_state();
+    oled_write_P(PSTR("CAPS"), led_state.caps_lock);
+
+    return false;
+}
+#endif
