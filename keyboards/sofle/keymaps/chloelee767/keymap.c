@@ -207,6 +207,21 @@ bool oled_task_user(void) {
 }
 #endif
 
+bool achordion_chord(uint16_t tap_hold_keycode,
+                     keyrecord_t* tap_hold_record,
+                     uint16_t other_keycode,
+                     keyrecord_t* other_record) {
+
+  // Allow same-hand holds for thumb key holds.
+  if (tap_hold_record->event.key.row == 4 || tap_hold_record->event.key.row == 9) {
+      return true;
+  }
+
+  // Otherwise, follow the opposite hands rule.
+  return achordion_opposite_hands(tap_hold_record, other_record);
+}
+
+
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   if (!process_achordion(keycode, record)) { return false; }
   // Your macros ...
