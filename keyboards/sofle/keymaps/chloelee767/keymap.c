@@ -217,10 +217,14 @@ bool achordion_chord(uint16_t tap_hold_keycode,
       return true;
   }
 
+  // Allow same hands for tab / tilde combos
+  if (other_keycode == KC_TAB || other_keycode == KC_GRV || other_keycode == KC_TILD) {
+      return true;
+  }
+
   // Otherwise, follow the opposite hands rule.
   return achordion_opposite_hands(tap_hold_record, other_record);
 }
-
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   if (!process_achordion(keycode, record)) { return false; }
