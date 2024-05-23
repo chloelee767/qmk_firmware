@@ -239,6 +239,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 
 // TODO try out typing streak?
 // TODO combo for enabling caps?
+// TODO num-mods layer
+// TODO think about how to do vim ctrl-e/y u/d
+// TODO exclude encoder from opposite hands rule
 
 void matrix_scan_user(void) {
   achordion_task();
