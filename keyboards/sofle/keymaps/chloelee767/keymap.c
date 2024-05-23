@@ -226,6 +226,10 @@ bool achordion_chord(uint16_t tap_hold_keycode,
   return achordion_opposite_hands(tap_hold_record, other_record);
 }
 
+uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
+  return 700;
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   if (!process_achordion(keycode, record)) { return false; }
   // Your macros ...
