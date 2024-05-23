@@ -237,6 +237,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   return true;
 }
 
+// TODO try out typing streak?
+// TODO combo for enabling caps?
+
 void matrix_scan_user(void) {
   achordion_task();
 }
