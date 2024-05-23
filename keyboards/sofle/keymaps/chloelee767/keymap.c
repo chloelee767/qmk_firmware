@@ -158,32 +158,32 @@ bool caps_word_press_user(uint16_t keycode) {
 
 #ifdef OLED_ENABLE
 void custom_print_status(void) {
+    // Note oled can only fit 5 characters per line
     // Host Keyboard Layer Status
     switch (get_highest_layer(layer_state)) {
         case _QWERTY:
-            oled_write_ln_P(PSTR("BASE"), false);
+            oled_write_P(PSTR("BASE\n"), false);
             break;
         case _SYMBOL:
-            oled_write_ln_P(PSTR("SYM"), false);
+            oled_write_P(PSTR("SYM\n"), false);
             break;
         case _NUMNAV:
-            oled_write_ln_P(PSTR("NMNAV"), false);
+            oled_write_P(PSTR("NMNAV"), false);
             break;
         case _FNKEY:
-            oled_write_ln_P(PSTR("FN"), false);
+            oled_write_P(PSTR("FN\n"), false);
             break;
         case _MULTIMEDIA:
-            oled_write_ln_P(PSTR("MEDIA"), false);
+            oled_write_P(PSTR("MEDIA"), false);
             break;
         default:
-            oled_write_ln_P(PSTR("?"), false);
+            oled_write_P(PSTR("?\n"), false);
     }
-    oled_write_ln_P("", false);
+
+    oled_write_ln_P(PSTR(""), false);
 
     // Host Keyboard LED Status
     oled_write_P(PSTR("CAPSW"), is_caps_word_on());
-    led_t led_state = host_keyboard_led_state();
-    oled_write_P(PSTR("C"), led_state.caps_lock);
 }
 
 /* Copied from ../../sofle.c */
