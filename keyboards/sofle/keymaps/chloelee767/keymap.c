@@ -123,14 +123,34 @@ KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
 
 };
 
-#if defined(ENCODER_MAP_ENABLE)
-const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [_QWERTY] = { ENCODER_CCW_CW(KC_PGUP, KC_PGDN), ENCODER_CCW_CW(KC_MS_WH_UP, KC_MS_WH_DOWN) },
-    [_SYMBOL] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
-    [_NUMNAV] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
-    [_FNKEY] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
-    [_MULTIMEDIA] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
-};
+#ifdef ENCODER_ENABLE
+bool encoder_update_user(uint8_t index, bool clockwise) {
+    if (layer_state_is(_MULTIMEDIA) && index == 0) {
+        if (clockwise) {
+            tap_code(KC_VOLU);
+        } else {
+            tap_code(KC_VOLD);
+        }
+        return false;
+    }
+
+    if (index == 0) {
+        if (clockwise) {
+            tap_code(KC_PGDN);
+        } else {
+            tap_code(KC_PGUP);
+        }
+    } else if (index == 1) {
+        if (clockwise) {
+            tap_code(KC_MS_WH_DOWN);
+        } else {
+            tap_code(KC_MS_WH_UP);
+        }
+
+    }
+    return false;
+}
+
 #endif
 
 #ifdef CAPS_WORD_ENABLE
@@ -241,7 +261,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 // TODO combo for enabling caps?
 // TODO num-mods layer
 // TODO think about how to do vim ctrl-e/y u/d
-// TODO exclude encoder from opposite hands rule
 
 void matrix_scan_user(void) {
   achordion_task();
