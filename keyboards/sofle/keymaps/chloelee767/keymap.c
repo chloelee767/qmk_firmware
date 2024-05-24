@@ -28,7 +28,7 @@ QK_CAPS_WORD_TOGGLE, KC_Z, KC_X, KC_C, KC_V, KC_B,
 /* Encoder presses */
 KC_MPLY, KC_NO,
 /* Zxc Row (Right) */
-KC_N, KC_M, KC_COMM, LT(_NUM,KC_DOT), KC_SLSH, KC_RSFT,
+KC_N, LT(_NUM,KC_M), LT(_NUM,KC_COMM), LT(_NUM,KC_DOT), KC_SLSH, KC_RSFT,
 /* Bottom Row */
 KC_LGUI, KC_LALT, LT(_FNKEY,KC_DEL), LT(_SYMBOL,KC_BSPC), LT(_NUMNAV,KC_TAB),
 LT(_SYMBOL,KC_ENT), LT(_NUMNAV,KC_SPC), LT(_FNKEY,KC_BSPC), KC_RALT, MO(_MULTIMEDIA)
@@ -272,27 +272,34 @@ uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
   return 700;
 }
 
+bool apply_mod_if_holding(uint16_t mod_keycode, keyrecord_t* record) {
+      if (!record->tap.count) { // if holding
+        if (record->event.pressed) { // on hold press
+          register_mods(MOD_BIT(mod_keycode));
+        } else { // on hold release
+          unregister_mods(MOD_BIT(mod_keycode));
+        }
+      }
+      return true; // Continue normal handling
+}
+
+
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   if (!process_achordion(keycode, record)) { return false; }
 
   // Your macros ...
 
-  // TODO num-mods layer
+  // num-mods layer
   switch (keycode) {
-    // Behave as KC_DOT/KC_O on tap, LM(_NUM,MOD_LGUI) on hold
     case LT(_NUM,KC_DOT):
     case LT(_NUM,KC_O):
-      if (!record->tap.count) { // if holding
-        if (record->event.pressed) { // on hold press
-          register_mods(MOD_BIT(KC_LGUI));
-        } else { // on hold release
-          unregister_mods(MOD_BIT(KC_LGUI));
-        }
-      }
-      return true; // Continue normal handling
-
+      // Behave as KC_DOT/KC_O on tap, LM(_NUM,MOD_LGUI) on hold
+      return apply_mod_if_holding(KC_LGUI, record);
+    case LT(_NUM,KC_COMM):
+      return apply_mod_if_holding(KC_LALT, record);
+    case LT(_NUM,KC_M):
+      return apply_mod_if_holding(KC_LCTL, record);
   }
-
 
   return true;
 }
