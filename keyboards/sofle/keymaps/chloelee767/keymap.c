@@ -40,7 +40,7 @@ LAYOUT(
 KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
 KC_NO, KC_TRNS, KC_TRNS, KC_TRNS, KC_NO, KC_NO,
 /* Qwerty Row */
-KC_TRNS, KC_NO, KC_PPLS, KC_PEQL, KC_NO, KC_GRV,
+KC_TRNS, KC_NO, KC_PPLS, KC_EQL, KC_NO, KC_GRV, /* Don't use KC_PEQL (numpad equal) for compatiblity with windows */
 KC_CIRC, KC_AMPR, KC_ASTR, KC_PIPE, KC_BSLS, KC_NO,
 /* Home Row */
 KC_TRNS, KC_EXLM, KC_PERC, KC_MINS, KC_COLN, KC_TILD,
