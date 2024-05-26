@@ -7,7 +7,8 @@ _SYMBOL,
 _NUMNAV,
 _FNKEY,
 _MULTIMEDIA,
-_NUM
+_NUM,
+_NAV
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -18,13 +19,13 @@ LAYOUT(
 KC_GRV, KC_HOME, KC_END, KC_PGUP, KC_PGDN, KC_GRV,
 KC_0, KC_LBRC, KC_RBRC, KC_BSLS, KC_MINS, KC_EQL,
 /* Qwerty Row */
-OSM(MOD_LSFT), LSFT_T(KC_Q), KC_W, LGUI_T(KC_E), KC_R, KC_T,
+OSM(MOD_LSFT), LSFT_T(KC_Q), LT(_NAV,KC_W), LGUI_T(KC_E), KC_R, KC_T,
 KC_Y, KC_U, LGUI_T(KC_I), LT(_NUM,KC_O), LSFT_T(KC_P), QK_CAPS_WORD_TOGGLE,
 /* Home Row */
 KC_ESC, LSFT_T(KC_A), LGUI_T(KC_S), LALT_T(KC_D), LCTL_T(KC_F), KC_G,
 KC_H, LCTL_T(KC_J), LALT_T(KC_K), LGUI_T(KC_L), LSFT_T(KC_SCLN), KC_QUOT,
 /* Zxc Row (Left) */
-QK_CAPS_WORD_TOGGLE, KC_Z, KC_X, KC_C, KC_V, KC_B,
+QK_CAPS_WORD_TOGGLE, KC_Z, LT(_NAV,KC_X), LT(_NAV,KC_C), LT(_NAV,KC_V), KC_B,
 /* Encoder presses */
 KC_MPLY, KC_NO,
 /* Zxc Row (Right) */
@@ -141,6 +142,26 @@ KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
 /* Bottom Row */
 KC_TRNS, KC_TRNS, KC_EQL, KC_0, KC_TRNS,
 KC_TRNS, KC_TRNS, KC_TRNS, KC_LSFT, KC_TRNS // Shift key in case of combos
+),
+
+[_NAV] = LAYOUT(
+/* Number Row */
+KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+KC_NO, KC_TRNS, KC_TRNS, KC_TRNS, KC_NO, KC_NO,
+/* Qwerty Row */
+KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+KC_HOME, KC_PGUP, KC_UP, KC_PGDN, KC_NO, KC_NO,
+/* Home Row */
+KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+KC_END, KC_LEFT, KC_DOWN, KC_RGHT, KC_LGUI, KC_NO,
+/* Zxc Row (Left) */
+KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+/* Encoder Presses */
+KC_TRNS, KC_TRNS,
+/* Zxc Row (Right) */
+KC_NO, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, KC_NO,
+/* Bottom Row */
+KC_TRNS, KC_LSFT, KC_TRNS, KC_TRNS, KC_TRNS, // Shift key in case of combos
 KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
 )
 
@@ -222,6 +243,9 @@ void custom_print_status(void) {
         case _NUM:
             oled_write_P(PSTR("NUM\n"), false);
             break;
+        case _NAV:
+            oled_write_P(PSTR("NAV\n"), false);
+            break;
         default:
             oled_write_P(PSTR("?\n"), false);
     }
@@ -293,8 +317,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 
   // Your macros ...
 
-  // num-mods layer
   switch (keycode) {
+    // num-mods layer
     case LT(_NUM,KC_DOT):
     case LT(_NUM,KC_O):
       // Behave as KC_DOT/KC_O on tap, LM(_NUM,MOD_LGUI) on hold
@@ -303,7 +327,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
       return apply_mod_if_holding(KC_LALT, record);
     case LT(_NUM,KC_M):
       return apply_mod_if_holding(KC_LCTL, record);
+    // nav-mods layer
+    case LT(_NAV,KC_X):
+    case LT(_NAV,KC_W):
+      // Behave as KC_DOT/KC_O on tap, LM(_NAV,MOD_LGUI) on hold
+      return apply_mod_if_holding(KC_LGUI, record);
+    case LT(_NAV,KC_C):
+      return apply_mod_if_holding(KC_LALT, record);
+    case LT(_NAV,KC_V):
+      return apply_mod_if_holding(KC_LCTL, record);
   }
+
 
   return true;
 }
