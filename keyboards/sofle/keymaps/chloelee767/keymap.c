@@ -218,6 +218,9 @@ void custom_print_status(void) {
         case _MULTIMEDIA:
             oled_write_P(PSTR("MEDIA"), false);
             break;
+        case _NUM:
+            oled_write_P(PSTR("NUM\n"), false);
+            break;
         default:
             oled_write_P(PSTR("?\n"), false);
     }
