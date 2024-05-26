@@ -138,10 +138,10 @@ KC_ASTR, KC_SLSH, KC_7, KC_8, KC_9, KC_BSLS,
 /* Encoder Presses */
 KC_TRNS, KC_TRNS,
 /* Zxc Row (Right) */
-KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_LSFT, KC_TRNS, // Shift key in case of combos
 /* Bottom Row */
 KC_TRNS, KC_TRNS, KC_EQL, KC_0, KC_TRNS,
-KC_TRNS, KC_TRNS, KC_TRNS, KC_LSFT, KC_TRNS // Shift key in case of combos
+KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
 ),
 
 [_NAV] = LAYOUT(
@@ -155,13 +155,13 @@ KC_HOME, KC_PGUP, KC_UP, KC_PGDN, KC_NO, KC_NO,
 KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
 KC_END, KC_LEFT, KC_DOWN, KC_RGHT, KC_LGUI, KC_NO,
 /* Zxc Row (Left) */
-KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+KC_TRNS, KC_LSFT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, // Shift key in case of combos
 /* Encoder Presses */
 KC_TRNS, KC_TRNS,
 /* Zxc Row (Right) */
 KC_NO, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, KC_NO,
 /* Bottom Row */
-KC_TRNS, KC_LSFT, KC_TRNS, KC_TRNS, KC_TRNS, // Shift key in case of combos
+KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
 KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
 )
 
