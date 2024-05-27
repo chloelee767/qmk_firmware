@@ -318,6 +318,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   // Your macros ...
 
   switch (keycode) {
+
     // num-mods layer
     case LT(_NUM,KC_DOT):
     case LT(_NUM,KC_O):
@@ -327,6 +328,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
       return apply_mod_if_holding(KC_LALT, record);
     case LT(_NUM,KC_M):
       return apply_mod_if_holding(KC_LCTL, record);
+
     // nav-mods layer
     case LT(_NAV,KC_X):
     case LT(_NAV,KC_W):
@@ -337,7 +339,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     case LT(_NAV,KC_V):
       return apply_mod_if_holding(KC_LCTL, record);
   }
-
 
   return true;
 }
