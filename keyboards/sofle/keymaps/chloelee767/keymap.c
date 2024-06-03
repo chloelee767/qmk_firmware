@@ -16,7 +16,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_QWERTY] =
 LAYOUT(
 /* Number Row */
-KC_GRV, KC_HOME, KC_END, KC_PGUP, KC_PGDN, KC_GRV,
+KC_GRV, KC_MS_WH_UP, KC_MS_WH_DOWN, KC_PGUP, KC_PGDN, KC_GRV,
 KC_0, KC_LBRC, KC_RBRC, KC_BSLS, KC_MINS, KC_EQL,
 /* Qwerty Row */
 OSM(MOD_LSFT), LSFT_T(KC_Q), LT(_NAV,KC_W), LGUI_T(KC_E), KC_R, KC_T,
@@ -180,10 +180,11 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
     if (index == 0) {
         if (clockwise) {
-            tap_code(KC_PGDN);
+            tap_code(KC_MS_WH_DOWN);
         } else {
-            tap_code(KC_PGUP);
+            tap_code(KC_MS_WH_UP);
         }
+
     } else if (index == 1) {
         if (clockwise) {
             tap_code(KC_MS_WH_DOWN);
@@ -291,6 +292,9 @@ bool achordion_chord(uint16_t tap_hold_keycode,
   if (other_keycode == KC_TAB || other_keycode == KC_GRV || other_keycode == KC_TILD) {
       return true;
   }
+
+  // TODO Allow same hand for zxc row combos
+
 
   // Otherwise, follow the opposite hands rule.
   return achordion_opposite_hands(tap_hold_record, other_record);
