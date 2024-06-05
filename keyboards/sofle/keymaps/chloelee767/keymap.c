@@ -85,13 +85,13 @@ LAYOUT(
 KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
 KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
 /* Qwerty Row */
-KC_NO, KC_F9, KC_F10, KC_F11, KC_F12, KC_F13,
+KC_NO, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,
 KC_NO, KC_NO, KC_LGUI, KC_NO, KC_NO, KC_NO,
 /* Home Row */
-KC_NO, KC_F5, KC_F6, KC_F7, KC_F8, KC_NO,
+KC_NO, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10,
 KC_NO, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, KC_NO,
 /* Zxc Row (Left) */
-KC_NO, KC_F1, KC_F2, KC_F3, KC_F4, KC_NO,
+KC_NO, KC_F11, KC_F12, KC_NO, KC_NO, KC_NO,
 /* Encoder Presses */
 KC_TRNS, KC_TRNS,
 /* Zxc Row (Right) */
