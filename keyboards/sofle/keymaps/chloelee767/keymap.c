@@ -180,18 +180,16 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
     if (index == 0) {
         if (clockwise) {
-            tap_code(KC_MS_DOWN);
-        } else {
-            tap_code(KC_MS_UP);
-        }
-
-    } else if (index == 1) {
-        if (clockwise) {
             tap_code(KC_MS_RIGHT);
         } else {
             tap_code(KC_MS_LEFT);
         }
-
+    } else if (index == 1) {
+        if (clockwise) {
+            tap_code(KC_MS_DOWN);
+        } else {
+            tap_code(KC_MS_UP);
+        }
     }
     return false;
 }
