@@ -25,11 +25,11 @@ KC_Y, KC_U, LGUI_T(KC_I), LT(_NUM,KC_O), LSFT_T(KC_P), QK_CAPS_WORD_TOGGLE,
 KC_ESC, LSFT_T(KC_A), LGUI_T(KC_S), LALT_T(KC_D), LCTL_T(KC_F), KC_G,
 KC_H, LCTL_T(KC_J), LALT_T(KC_K), LGUI_T(KC_L), LSFT_T(KC_SCLN), KC_QUOT,
 /* Zxc Row (Left) */
-QK_CAPS_WORD_TOGGLE, KC_Z, LT(_NAV,KC_X), LT(_NAV,KC_C), LT(_NAV,KC_V), KC_B,
+QK_CAPS_WORD_TOGGLE, LT(_NAV,KC_Z), LT(_NAV,KC_X), LT(_NAV,KC_C), LT(_NAV,KC_V), KC_B,
 /* Encoder presses */
 KC_MPLY, KC_NO,
 /* Zxc Row (Right) */
-KC_N, LT(_NUM,KC_M), LT(_NUM,KC_COMM), LT(_NUM,KC_DOT), KC_SLSH, KC_RSFT,
+KC_N, LT(_NUM,KC_M), LT(_NUM,KC_COMM), LT(_NUM,KC_DOT), LT(_NUM,KC_SLSH), KC_RSFT,
 /* Bottom Row */
 KC_LGUI, KC_LALT, LT(_FNKEY,KC_DEL), LT(_SYMBOL,KC_BSPC), LT(_NUMNAV,KC_TAB),
 LT(_SYMBOL,KC_ENT), LT(_NUMNAV,KC_SPC), LT(_FNKEY,KC_BSPC), KC_RALT, MO(_MULTIMEDIA)
@@ -138,7 +138,7 @@ KC_ASTR, KC_SLSH, KC_7, KC_8, KC_9, KC_BSLS,
 /* Encoder Presses */
 KC_TRNS, KC_TRNS,
 /* Zxc Row (Right) */
-KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_LSFT, KC_TRNS, // Shift key in case of combos
+KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
 /* Bottom Row */
 KC_TRNS, KC_TRNS, KC_EQL, KC_0, KC_TRNS,
 KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
@@ -155,7 +155,7 @@ KC_HOME, KC_PGUP, KC_UP, KC_PGDN, KC_NO, KC_NO,
 KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
 KC_END, KC_LEFT, KC_DOWN, KC_RGHT, KC_LGUI, KC_NO,
 /* Zxc Row (Left) */
-KC_TRNS, KC_LSFT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, // Shift key in case of combos
+KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
 /* Encoder Presses */
 KC_TRNS, KC_TRNS,
 /* Zxc Row (Right) */
@@ -330,6 +330,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
       return apply_mod_if_holding(KC_LALT, record);
     case LT(_NUM,KC_M):
       return apply_mod_if_holding(KC_LCTL, record);
+    case LT(_NUM,KC_SLSH):
+      return apply_mod_if_holding(KC_LSFT, record);
 
     // nav-mods layer
     case LT(_NAV,KC_X):
@@ -340,6 +342,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
       return apply_mod_if_holding(KC_LALT, record);
     case LT(_NAV,KC_V):
       return apply_mod_if_holding(KC_LCTL, record);
+    case LT(_NAV,KC_Z):
+      return apply_mod_if_holding(KC_LSFT, record);
   }
 
   return true;
